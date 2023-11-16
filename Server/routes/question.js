@@ -6,6 +6,6 @@ dotenv.config()
 
 const router = express.Router()
 
-router.post('/question', generateQuestion)
+router.get('/question', generateQuestion)
 
 export default router
