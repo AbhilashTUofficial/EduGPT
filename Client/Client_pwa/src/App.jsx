@@ -7,10 +7,8 @@ import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Progress from "./pages/Progress/Progress";
 import ProgressChart from "./pages/ProgressChart/ProgressChart";
-import Test from "./pages/Test/test"
+import Test from "./pages/Test/Test"
 import SetData from "./pages/SetData/SetData";
-import Progress from "./pages/Progress/Progress";
-import ProgressChart from "./pages/ProgressChart/ProgressChart";
 
 function App() {
   const [count, setCount] = useState(0);

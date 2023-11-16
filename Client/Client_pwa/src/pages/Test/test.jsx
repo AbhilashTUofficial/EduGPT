@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import axios from 'axios'
+import ConvertApi from 'convertapi-js';
+import { useStateContext } from "../../context/StateContext";
 
 export default function Test() {
+  const {classes} = useStateContext()
   const [testName, setTestName] = useState("");
   const [testDesc, setTestDesc] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,22 +19,27 @@ export default function Test() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    if (selectedFile) {
+      try {
+        const convertApi = ConvertApi.auth('lV8TdrWKiknX5AeC');
+        const params = convertApi.createParams();
+        params.add('File', selectedFile);
 
-    // Perform any logic with the state values here (e.g., submit data to a server)
-    console.log("Test Name:", testName);
-    console.log("Test Description:", testDesc);
-    console.log("Selected File:", selectedFile);
-    console.log("Class Name:", className);
-    console.log("Question Type:", questionType);
-
-    // Reset the form or perform any other necessary actions
-    setTestName("");
-    setTestDesc("");
-    setSelectedFile(null);
-    setClassName("");
-    setQuestionType("");
+        const result = await convertApi.convert('pdf', 'txt', params);
+        console.log(result.dto.Files[0].Url)
+        const response = await axios.post('http://localhost:3000/api/pdf', {url: result.dto.Files[0].Url, testName, testDesc, className, questionType})
+        if(response){
+            console.log(response)
+        }
+      } catch (error) {
+        console.error('Error converting file:', error);
+      }
+    } else {
+      console.warn('Please select a file first.');
+    }
+    
   };
 
   return (
@@ -74,12 +83,12 @@ export default function Test() {
           onChange={(e) => setClassName(e.target.value)}
           className="relative h-[3rem] w-[20rem] p-6 ml-2 mt-5 bg-gray-200 te flex flex-col justify-center items-center rounded-xl"
         >
-          <option></option>
-          <option>IT A</option>
-          <option>IT B</option>
-          <option>CS A</option>
-          <option>CS B</option>
-          <option>EC A</option>
+          <option>Select Class</option>
+          {classes && classes.map((cls) => (
+            <option value={cls}>{cls}</option>
+          ))
+          }
+          
         </select>
 
         <h3 className="font-bold text-2xl text-teal-500 mt-4 ml-5">Type Of Question</h3>
