@@ -42,6 +42,26 @@ export async function callOpenAI(pdfData,type) {
   }
 }
 
-// module.exports = {
-//     callOpenAI
-// };
+export async function getWeakestTopic(array) {
+  try{
+
+    const csvString = array.join(',');
+
+    let prompt = ` ${csvString} these are the topics now give me csv of the weakest topic in the csv format. only give  what i ask for nothing else.`
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      max_tokens:2048 ,
+      temperature: 0,
+      // stream: true
+    });
+
+    const output = response.data.choices[0].text.trim()
+    return output;
+  }
+  catch(error){
+    console.error('Error in calling OpenAI API:', error.message);
+    throw new Error('Failed to call OpenAI API');
+  }
+
+}
