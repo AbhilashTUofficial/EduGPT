@@ -9,6 +9,7 @@ import Progress from "./pages/Progress/Progress";
 import ProgressChart from "./pages/ProgressChart/ProgressChart";
 import Test from "./pages/Test/Test"
 import SetData from "./pages/SetData/SetData";
+import Questions from "./pages/Questions/Questions";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,6 +22,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/setdata" element={<SetData />} />
+        <Route path="/questions" element={<Questions />} />
         {/* <Route path="/Test" element={<Test />} /> */}
         <Route path="/Test" element={<Test />} />
         <Route path="/progress" element={<Progress/>} />
