@@ -5,6 +5,7 @@ import Home from "./pages/Home/home";
 import Otp from "./pages/Otp/Otp";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
+import Test from "./pages/Test/test"
 
 function App() {
   const [count, setCount] = useState(0);
