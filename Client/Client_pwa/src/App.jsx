@@ -5,6 +5,8 @@ import Home from "./pages/Home/home";
 import Otp from "./pages/Otp/Otp";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
+import Progress from "./pages/Progress/Progress";
+import ProgressChart from "./pages/ProgressChart/ProgressChart";
 import Test from "./pages/Test/test"
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/Test" element={<Test />} />
+        <Route path="/progress" element={<Progress/>} />
+        <Route path="/progress/:id" element={<ProgressChart/>} />
       </Routes>
     </>
   );

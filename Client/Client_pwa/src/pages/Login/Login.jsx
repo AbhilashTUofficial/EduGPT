@@ -97,7 +97,7 @@ function Login() {
           </div>
         </div>
       ) : (
-        <Otp handleLoginchange={handleLoginchange} phoneNumber={phoneNumber} />
+        <Otp handleLoginchange={handleLoginchange} PhoneNumber={phoneNumber} />
         // <h1>hi</h1>
       )}
     </div>

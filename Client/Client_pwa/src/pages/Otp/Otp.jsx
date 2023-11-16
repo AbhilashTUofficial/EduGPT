@@ -4,6 +4,7 @@ import bg from '../../assets/bg.png'
 import Otpbox from '../../components/Otp/Otpbox'
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 // import { PhoneNumber } from 'react-phone-number-input';
 
 function Otp({ handleLoginchange,PhoneNumber }) {
@@ -19,7 +20,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
       const user = result.user
       console.log('logged in successfully', user)
 
-      user.getIdTokenResult().then((tokenResult) => {
+      user.getIdTokenResult().then(async(tokenResult) => {
         const { token } = tokenResult
         const accessToken = token
         // setLoading(false)
@@ -27,10 +28,16 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         const refreshToken = tokenResult.token
         localStorage.setItem('refreshToken', refreshToken)
         localStorage.setItem('phone', `${PhoneNumber}`)
-        window.location.replace('/home')
+        localStorage.setItem('uid', user.uid)
+        const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
+        if(result.data.exists){
+          window.location.replace('/home')
+        }else{
+          window.location.replace('/setdata')
+        }
       }).catch((error) => {
         console.log(error)
-        setLoading(false)
+        // setLoading(false)
         setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
         console.log('No access token')
       })

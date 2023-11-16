@@ -5,16 +5,18 @@ const db = getFirestore();
 
 const insertUser = async(req, res) => {
     try {
-        const studentRef = db.collection('students').doc(req.body.uid);
-        const studentGet = await studentRef.get();
-        const studentData = studentGet.data();
-        if(studentData){
+        const phone = req.body.phone
+        console.log(req.body.uid, phone)
+        const userRef = db.collection('users').doc(req.body.uid);
+        const userGet = await userRef.get();
+        if(userGet.data()){
             res.json({exists: 1, message: "User already exists"})
         }else{
-            await studentRef.set({
+            await userRef.set({
                 name: '',
-                type: 0, // 0 for student, 1 for teacher
+                type: 0, // 0 for uni, 1 for teacher, 2 for student
                 phone: req.body.phone,
+                class: '',
                 points: {}
             })
             res.json({exists: 0, message: "User created"})

@@ -1,6 +1,7 @@
 import express from 'express';
 import insertUser from '../controllers/user/insertUser.js';
-import setName from '../controllers/user/setName.js'
+import setData from '../controllers/user/setData.js'
+import fetchUsers from '../controllers/user/fetchUsers.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -8,6 +9,7 @@ dotenv.config()
 const router = express.Router()
 
 router.post('/login', insertUser)
-router.post('setname', setName)
+router.post('/setdata', setData)
+router.get('/user', fetchUsers)
 
 export default router
