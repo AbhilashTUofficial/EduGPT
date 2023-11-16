@@ -3,9 +3,7 @@ import bg from '../../assets/images/bg.png'
 import Otpbox from '../../components/Otp/Otpbox'
 import {IoMdArrowRoundBack} from 'react-icons/io';
 
-
-
-export default function Otp() {
+ function Otp() {
   return (
     <div>
       <div className='flex justify-center items-center flex-col'>
@@ -43,3 +41,5 @@ export default function Otp() {
     </div>
   )
 }
+
+export default Otp;
