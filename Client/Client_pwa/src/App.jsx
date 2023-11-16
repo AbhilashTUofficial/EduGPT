@@ -5,6 +5,9 @@ import Home from "./pages/Home/home";
 import Otp from "./pages/Otp/Otp";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
+import Test from "./pages/Test/Test";
+import Progress from "./pages/Progress/Progress";
+import ProgressChart from "./pages/ProgressChart/ProgressChart";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +20,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/Test" element={<Test />} />
+        <Route path="/progress" element={<Progress/>} />
+        <Route path="/progress/:id" element={<ProgressChart/>} />
       </Routes>
     </>
   );
