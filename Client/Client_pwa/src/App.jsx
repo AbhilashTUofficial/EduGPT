@@ -7,6 +7,7 @@ import { Routes } from "react-router-dom";
 // import Userdetails from './pages/Userdetails/Userdetails'
 // import Home from './pages/Home/Home'
 import Otp from "./pages/Otp/Otp";
+import File from "./pages/File";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/Otp" element={<Otp />} />
+        <Route path="/file" element={<File />} />
       </Routes>
     </>
   );
