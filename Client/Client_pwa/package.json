@@ -10,8 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "axios": "^1.6.2",
+    "convertapi-js": "~1.1",
+=======
     "dotenv": "^16.3.1",
     "firebase": "^10.6.0",
+>>>>>>> 3e7da758640e11f3932f7d8ceda8e75182a5e0fa
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
