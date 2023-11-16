@@ -1,11 +1,13 @@
-const { Configuration, OpenAIApi } = require("openai");
-require('dotenv').config();
+import {Configuration, OpenAIApi} from 'openai'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-async function callOpenAI(pdfData,type) {
+
+export async function callOpenAI(pdfData,type) {
   try {
 
     let prompt;
@@ -40,6 +42,6 @@ async function callOpenAI(pdfData,type) {
   }
 }
 
-module.exports = {
-    callOpenAI
-  };
+// module.exports = {
+//     callOpenAI
+// };
