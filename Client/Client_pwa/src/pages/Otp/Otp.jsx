@@ -1,5 +1,5 @@
 import React from 'react'
-import bg from '../../assets/images/bg.png'
+import bg from '../../assets/bg.png'
 import Otpbox from '../../components/Otp/Otpbox'
 import {IoMdArrowRoundBack} from 'react-icons/io';
 

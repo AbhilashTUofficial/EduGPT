@@ -1,7 +1,7 @@
 import React from "react";
 import Testbox from "../../components/Testbox/Testbox";
 import Classbox from "../../components/classbox/classbox";
-// import { teach } from "../../.";
+import teach from "../../assets/teach.jpg"
 
 export default function home() {
   return (
@@ -22,7 +22,7 @@ export default function home() {
         <Classbox />
         <Classbox />
       </div>
-      <img src="" />
+      <img src={teach}  alt='teach'/>
     </div>
   );
 }
