@@ -1,7 +1,47 @@
-import React from 'react'
-import bg from '../../assets/images/bg.png'
-import Otpbox from '../../components/Otp/Otpbox'
-import {IoMdArrowRoundBack} from 'react-icons/io';
+import React, { useState } from 'react';
+import bg from '../../assets/bg.png'
+// import logo from '../../assets/logo.png'
+import Otpbox from '../../components/otp/Otpbox'
+import { IoMdArrowRoundBack } from 'react-icons/io';
+import {useNavigate} from 'react-router-dom'
+// import { PhoneNumber } from 'react-phone-number-input';
+
+function Otp({ handleLoginchange,PhoneNumber }) {
+  const [otp, setOtp] = useState("");
+  const navigate = useNavigate()
+
+  const handleOtpChange = (value) => {
+    setOtp(value);
+  };
+
+  const handleOtpVerification = () => {
+    window.confirmationResult.confirm(otp).then((result) => {
+      const user = result.user
+      console.log('logged in successfully', user)
+
+      user.getIdTokenResult().then((tokenResult) => {
+        const { token } = tokenResult
+        const accessToken = token
+        // setLoading(false)
+        localStorage.setItem('accessToken', accessToken)
+        const refreshToken = tokenResult.token
+        localStorage.setItem('refreshToken', refreshToken)
+        localStorage.setItem('phone', `${PhoneNumber}`)
+        window.location.replace('/home')
+      }).catch((error) => {
+        console.log(error)
+        setLoading(false)
+        setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
+        console.log('No access token')
+      })
+    }).catch((error) => {
+      console.log(error)
+      setLoading(false)
+      setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
+      console.log('user couldnt sign in')
+    })
+  };
+  const isOtpFilled = true;
 
  function Otp() {
   return (
@@ -41,5 +81,5 @@ import {IoMdArrowRoundBack} from 'react-icons/io';
     </div>
   )
 }
-
+}
 export default Otp;
