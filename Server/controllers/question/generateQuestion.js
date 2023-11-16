@@ -1,4 +1,4 @@
-import {callOpenAI} from '../../services/openaiServices'
+import {callOpenAI} from '../../services/openaiServices.js'
 
 
 const generateQuestion = async (req,res) => {
