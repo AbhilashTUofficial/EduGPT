@@ -9,7 +9,7 @@ const fetchClass = async(req, res) => {
         const classGet = await classRef.get();
         const classes = [];
         classGet.forEach(doc => {
-            classes.push(doc.data().id)
+            classes.push(doc.id)
         })
         res.json({classes})        
     } catch (error) {
