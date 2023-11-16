@@ -25,7 +25,7 @@ serviceAccountKey.client_x509_cert_url = process.env.CLIENT_X509_CERT_URL
 serviceAccountKey.universe_domain = process.env.UNIVERSE_DOMAIN
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
-  storageBucket: process.env.STORAGE_BUCKED
+  // storageBucket: process.env.STORAGE_BUCKED
 });
 
 export default admin
