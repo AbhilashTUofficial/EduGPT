@@ -43,29 +43,30 @@ function Otp({ handleLoginchange,PhoneNumber }) {
   };
   const isOtpFilled = true;
 
+ function Otp() {
   return (
     <div>
       <div className='flex justify-center items-center flex-col'>
         <div className="relative">
           <img src={bg} alt="background" />
-          {/* <img src={logo} alt="logo" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" /> */}
+          
         </div>
 
         <div className='relative h-screen/2 w-screen bg-white flex flex-col justify-center items-center'>
           <div className='!mr-[20rem] !mt-3'>
-            <IoMdArrowRoundBack size={40} onClick={handleLoginchange} />
+            <IoMdArrowRoundBack size={40}  />
           </div>
           <div className='flex flex-col items-center justify-center gap-y-3'>
             <h1 className='font-bold text-2xl text-teal-500 '>Enter OTP</h1>
             <p>We have send an OTP to your mobile number</p>
           </div>
           <div className='mt-[2rem]'>
-            <Otpbox otp={otp} handleOtpChange={handleOtpChange} />
+            <Otpbox  />
           </div>
           <div className='mt-[3rem]'>
             <button
               className='h-[52px] w-[335px] rounded-lg font-bold font-inter bg-teal-500  text-white'
-              onClick={handleOtpVerification}
+              
             >
               Sign In
             </button>
@@ -78,7 +79,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
-
+}
 export default Otp;
