@@ -9,19 +9,20 @@ const openai = new OpenAIApi(configuration);
 
 export async function callOpenAI(pdfData,type) {
   try {
-
+    console.log(pdfData,type)
+    const pdfDataWithCommas = pdfData.replace(/ {2}/g, ',')
     let prompt;
 
     if(type==1){
-     prompt = ` ${pdfData} generate me 10 questions based on this with options and also the correct answer in json format.
+     prompt = ` ${pdfDataWithCommas} generate me 10 questions based on this with options and also the correct answer in json format.
     only give the question as response no other explanation or anything needed , just what i asked for , make it array of jsons`
     }
     else if(type==2){
-     prompt = ` ${pdfData} generate me 10 true or false question based on this data , only the questions and correct answer , 
+     prompt = ` ${pdfDataWithCommas} generate me 10 true or false question based on this data , only the questions and correct answer , 
     no other explanation or anything needed , only what i asked for in array of jsons format`
     }
     else{
-        prompt = `${pdfData} generate me 10 true or false  and multiple choice  question based on this data , only the questions and correct answer  and options if its a multiple choice , no other explanation or anything needed , only what i asked for in array of jsons format 
+        prompt = `${pdfDataWithCommas} generate me 10 true or false  and multiple choice  question based on this data , only the questions and correct answer  and options if its a multiple choice , no other explanation or anything needed , only what i asked for in array of jsons format 
        .  add type 1 for multiple choice and 2 for true or false`
     }
 
@@ -29,7 +30,7 @@ export async function callOpenAI(pdfData,type) {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
-      max_tokens:2048 ,
+      max_tokens: 2048,
       temperature: 0,
       // stream: true
     });

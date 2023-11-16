@@ -1,4 +1,4 @@
-import getWeakestTopic from '../../services/openaiServices.js'
+import {getWeakestTopic} from '../../services/openaiServices.js'
 
 const weakestTopic = async(req, res) => {
     try {

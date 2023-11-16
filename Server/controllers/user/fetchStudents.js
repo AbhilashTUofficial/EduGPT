@@ -1,4 +1,9 @@
-const fetchUsers = async (req, res) => {
+import admin from '../../config/firebase-config.js'
+import {getFirestore} from 'firebase-admin/firestore'
+
+const db = getFirestore();
+
+const fetchStudents = async (req, res) => {
     try {
         const studentRef = db.collection('students');
         const studentGet = await studentRef.get();
@@ -11,4 +16,4 @@ const fetchUsers = async (req, res) => {
         console.log(error);
     }
 }
-export default fetchUsers;
+export default fetchStudents;
