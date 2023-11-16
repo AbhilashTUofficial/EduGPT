@@ -1,3 +1,8 @@
+import admin from '../../config/firebase-config.js'
+import {getFirestore} from 'firebase-admin/firestore'
+
+const db = getFirestore();
+
 const setName = async(req, res) => {
     try {
         const studentRef = db.collection('students').doc(req.body.uid);

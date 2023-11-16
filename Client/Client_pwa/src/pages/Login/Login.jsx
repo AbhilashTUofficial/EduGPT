@@ -33,11 +33,10 @@ function Login() {
     setPhoneNumber(value);
   };
 
-  const handleSubmit =  () => {
-    setIsloggedin(!isloggedin);
+  const handleSubmit =  ()=> {
     console.log("phonee",phoneNumber)
     // login(phoneNumber);  const auth = getAuth()
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, {
+     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'sign-in-button', {
       'size': 'invisible',
       'callback': (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
@@ -46,12 +45,13 @@ function Login() {
       }
     });
     const appVerifier = window.recaptchaVerifier
-     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
     .then((confirmationResult) => {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
       window.confirmationResult = confirmationResult;
       console.log("confirmationResult",confirmationResult)
+      setIsloggedin(!isloggedin);
       // ...
     }).catch((error) => {
       // Error; SMS not sent
@@ -97,8 +97,8 @@ function Login() {
           </div>
         </div>
       ) : (
-        // <Otp handleLoginchange={handleLoginchange} phoneNumber={phoneNumber} />
-        <h1>hi</h1>
+        <Otp handleLoginchange={handleLoginchange} phoneNumber={phoneNumber} />
+        // <h1>hi</h1>
       )}
     </div>
   );
