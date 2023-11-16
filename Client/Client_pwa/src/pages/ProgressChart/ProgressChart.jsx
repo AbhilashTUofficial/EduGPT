@@ -44,18 +44,19 @@ function ProgressChart() {
      <h1 className='text-3xl font-bold pb-10'> Section {MyId}</h1>
       <Pie data={data} className=''/>
       <div className='pt-8 text-semibold text-xl border-2 bg-gray-100 p-5 mt-7 rounded-xl'>
-        <div className=''>
-            <h1 className='font-bold py-3'>Most Loved question by students</h1>
-            <h2 className='text-teal-500 font-semibold'>djvbsd</h2>
-        </div>
         <div>
-            <h1 className='font-bold py-3'>Most Hated question by students</h1>
+            <h1 className='font-bold py-3'> Weakest area of students</h1>
             <h2 className='text-teal-500 font-semibold'> sdkvj</h2>
         </div>
       </div>
-        <button className='bg-teal-500 rounded-lg text-white p-3 mt-7'>
-            <h1 className='font-bold py-3'>View all Students data</h1>
+      <div className='flex flex-col justify-center items-center mt-6 gap-5 w-full'>    
+        <button className='bg-teal-500 rounded-lg text-white p-3 w-full '>
+            <h1 className='font-bold py-3 '>View all Students data</h1>
         </button>
+        <button className='bg-teal-500 rounded-lg text-white p-3 w-full'>
+            <h1 className='font-bold py-3'>Send resources </h1>
+        </button>
+      </div>
     </div>
   );
 }
