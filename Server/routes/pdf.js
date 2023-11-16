@@ -1,5 +1,5 @@
 import express from 'express';
-import parsePDF from '../controllers/pdf/parsePDF';
+import parsePDF from '../controllers/PDF/parsePDF.js';
 import dotenv from 'dotenv'
 
 dotenv.config()

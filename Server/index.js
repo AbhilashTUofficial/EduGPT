@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import routes from './routes/index.js'
 import dotenv from 'dotenv'
-import middleware from './middleware/index.js'
+// import middleware from './middleware/index.js'
 
 dotenv.config()
 
@@ -12,7 +12,7 @@ app.use(cors({origin: '*',credentials: true}))
 
 app.use(express.json({extended: true}))
 
-app.use(middleware.decodeToken)
+// app.use(middleware.decodeToken)
 
 app.use('/api', routes);
 
