@@ -15,9 +15,10 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
 
-        <Route path="/Otp" element={<Otp />} />
+        {/* <Route path="/Otp" element={<Otp />} /> */}
+        
       </Routes>
     </>
   );

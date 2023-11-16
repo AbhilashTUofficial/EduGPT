@@ -5,7 +5,7 @@ export default function Otpbox() {
   return (
     <div className="rounded-md p-4 text-lg text-center mx-auto">
       <div className="flex justify-center items-center space-x-4">
-        <OtpInput
+      <OtpInput
           numInputs={4}
           separator={<span style={{ width: "8px" }}></span>}
           inputStyle={{
