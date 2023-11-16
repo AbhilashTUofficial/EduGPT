@@ -18,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/setdata" element={<SetData />} />
+        {/* <Route path="/Test" element={<Test />} /> */}
       </Routes>
     </>
   );

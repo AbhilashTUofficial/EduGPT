@@ -46,13 +46,13 @@ const DataBox = () => {
                 <option value={2}>Student</option>
             </select>
 
-            <input
+            {userType == 2 && <input
                 type="text"
                 placeholder="Enter class name"
                 value={className}
                 onChange={handleClassNameChange}
                 className="border border-1 my-5 pl-3 py-3 rounded-[7px] w-full"
-            />
+            />}
             <button className='bg-black px-3 py-3 rounded-[7px] flex justify-center m-auto text-white' onClick={handleSubmit}>Submit</button>
         </div>
     </div>
