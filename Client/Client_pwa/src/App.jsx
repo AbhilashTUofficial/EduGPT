@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
-import Home from "./pages/Home/home"
+import Home from "./pages/Home/home";
 import Otp from "./pages/Otp/Otp";
+import Landing from "./pages/Landing/Landing";
+import Login from "./pages/Login/Login";
 
 function App() {
   const [count, setCount] = useState(0);

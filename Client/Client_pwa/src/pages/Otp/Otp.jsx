@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import bg from '../../assets/bg.png'
 // import logo from '../../assets/logo.png'
-import Otpbox from '../../components/Otp/Otpbox.jsx'
+import Otpbox from '../../components/Otp/Otpbox'
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import {useNavigate} from 'react-router-dom'
 // import { PhoneNumber } from 'react-phone-number-input';
 
 function Otp({ handleLoginchange,PhoneNumber }) {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(0);
   const navigate = useNavigate()
 
   const handleOtpChange = (value) => {
@@ -43,7 +43,6 @@ function Otp({ handleLoginchange,PhoneNumber }) {
   };
   const isOtpFilled = true;
 
- function Otp() {
   return (
     <div>
       <div className='flex justify-center items-center flex-col'>
@@ -61,12 +60,12 @@ function Otp({ handleLoginchange,PhoneNumber }) {
             <p>We have send an OTP to your mobile number</p>
           </div>
           <div className='mt-[2rem]'>
-            <Otpbox  />
+            <Otpbox otp={otp} handleOtpChange={handleOtpChange} />
           </div>
           <div className='mt-[3rem]'>
             <button
               className='h-[52px] w-[335px] rounded-lg font-bold font-inter bg-teal-500  text-white'
-              
+              onClick={handleOtpVerification}
             >
               Sign In
             </button>
@@ -80,6 +79,6 @@ function Otp({ handleLoginchange,PhoneNumber }) {
       </div>
     </div>
   )
-}
+
 }
 export default Otp;
