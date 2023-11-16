@@ -1,6 +1,6 @@
 import axios from 'axios'
 import generateQuestion from '../question/generateQuestion.js'
-const parsePDF = (req, res) => {
+const parsePDF = async (req, res) => {
     try {
         const apiUrl = `https://v2.convertapi.com/convert/pdf/to/txt?Secret=${process.env.CONVERT_API_SECRET}`;
         const pdfFilePath = 'my_file.pdf';
