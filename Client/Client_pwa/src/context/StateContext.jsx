@@ -6,6 +6,8 @@ const StateContext = React.createContext()
 export const StateContextProvider = ({ children }) => {
     const [classes, setClasses] = React.useState([])
     const [students, setStudents] = React.useState([])
+    const [tests, setTests] = React.useState([])
+    const [userDetails, setUserDetails] = React.useState({})
     
     const fetchClasses = async () => {
         try{
@@ -24,14 +26,37 @@ export const StateContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+    const fetchUserDetails = async() => {
+      try {
+        if(localStorage.getItem('uid') !== null || localStorage.getItem('uid') !== ''){
+          const response = await axios.get(`http://localhost:3000/api/user/${localStorage.getItem('uid')}`)
+          setUserDetails(response.data.user)
+          console.log(response.data.user)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    const fetchTests = async() => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/test')
+        setTests(response.data.tests)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     React.useEffect(() => {
       fetchClasses()
       fetchStudents()
+      fetchTests()
+      fetchUserDetails()
     }, [])
   return (
     <StateContext.Provider value={{
       classes,
-      students
+      students,
+      userDetails,
+      tests
     }}>
       {children}
     </StateContext.Provider>

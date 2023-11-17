@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 
 const YesOrNo = ({ question, onAnswer }) => {
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(30);
   const [userAnswer, setUserAnswer] = useState(null);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const YesOrNo = ({ question, onAnswer }) => {
 };
 
 const MultipleChoice = ({ question, options, onAnswer }) => {
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(30);
   const [userAnswer, setUserAnswer] = useState(null);
 
   useEffect(() => {
@@ -80,7 +82,7 @@ const MultipleChoice = ({ question, options, onAnswer }) => {
           {options.map((option, index) => (
             <button
               key={index}
-              className="bg-blue-500 w-full text-white px-4 py-2 rounded-md mb-2 hover:bg-blue-600"
+              className="bg-zinc-700 w-full text-white px-4 py-2 rounded-md mb-2 hover:bg-blue-600"
               onClick={() => {
                 handleUserAnswer(option);
                 onAnswer(option);
@@ -98,27 +100,28 @@ const MultipleChoice = ({ question, options, onAnswer }) => {
 
 function Questions() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState([])
   const [score, setScore] = useState(0);
-
-  const data = [
-    { type: 'YesNo', question: 'Is the sky blue?', answer: 'Yes' },
-    {
-      type: 'MultipleChoice',
-      question: 'What is the capital of France?',
-      options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
-      answer: 'Paris',
-    },
-    { type: 'YesNo', question: 'Are elephants reptiles?', answer: 'No' },
-    {
-      type: 'MultipleChoice',
-      question: 'Which programming language is React built with?',
-      options: ['JavaScript', 'Java', 'C++', 'Python'],
-      answer: 'JavaScript',
-    },
-  ];
+  const { id } = useParams();
+  // const data = [
+  //   { type: 'YesNo', question: 'Is the sky blue?', answer: 'Yes' },
+  //   {
+  //     type: 'MultipleChoice',
+  //     question: 'What is the capital of France?',
+  //     options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
+  //     answer: 'Paris',
+  //   },
+  //   { type: 'YesNo', question: 'Are elephants reptiles?', answer: 'No' },
+  //   {
+  //     type: 'MultipleChoice',
+  //     question: 'Which programming language is React built with?',
+  //     options: ['JavaScript', 'Java', 'C++', 'Python'],
+  //     answer: 'JavaScript',
+  //   },
+  // ];
 
   const handleAnswer = (userResponse) => {
-    const currentQuestion = data[currentQuestionIndex];
+    const currentQuestion = questions[currentQuestionIndex];
 
     if (userResponse === 'TimeUp' || userResponse === currentQuestion.answer) {
       setScore((prevScore) => prevScore + 1);
@@ -128,17 +131,24 @@ function Questions() {
   };
 
   useEffect(() => {
-    if (currentQuestionIndex === data.length) {
+    if (currentQuestionIndex === questions.length) {
       console.log('Final Score:', score);
     }
-  }, [currentQuestionIndex, score, data.length]);
+  }, [currentQuestionIndex, score, questions.length]);
+  useEffect(() => {
+    const fetchQuestion = async () => {
+      const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+      setQuestions(response.data.questions)
+    }
+    fetchQuestion()
+  }, [])
 
-  const renderQuestion = () => {
-    const currentQuestion = data[currentQuestionIndex];
+  const renderQuestion = (questions) => {
+    const currentQuestion = questions[currentQuestionIndex];
 
-    if (currentQuestion.type === 'YesNo') {
+    if (currentQuestion.type === 1) {
       return <YesOrNo question={currentQuestion.question} onAnswer={handleAnswer} />;
-    } else if (currentQuestion.type === 'MultipleChoice') {
+    } else if (currentQuestion.type === 0) {
       return (
         <MultipleChoice
           question={currentQuestion.question}
@@ -153,8 +163,8 @@ function Questions() {
 
   return (
     <div>
-      {currentQuestionIndex < data.length ? (
-        renderQuestion()
+      {questions && currentQuestionIndex < questions.length ? (
+        renderQuestion(questions)
       ) : (
         <div className='w-screen h-screen justify-center items-center flex'>
             <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>

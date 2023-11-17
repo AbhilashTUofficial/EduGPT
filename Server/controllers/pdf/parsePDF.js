@@ -17,13 +17,14 @@ const parsePDF = async (req, res) => {
             req.body.url
         );
 
-        const testRef = db.collection('tests').doc(req.body.className);
-        await testRef.set({testName: req.body.testName, testDesc: req.body.testDesc})
+        const testRef = db.collection('tests').doc(req.body.testName.replace(/\s/g, '').toLowerCase());
         
         const textContent = response.data;
-
+        
         const questions = await generateQuestion(textContent, req.body.questionType)
         
+        await testRef.set({testName: req.body.testName, testDesc: req.body.testDesc, questions: JSON.parse(questions), className: req.body.className})
+
         res.status(200).json({questions})
     } catch (error){
         console.log(error)
