@@ -129,10 +129,10 @@ function Questions() {
     if (userResponse === 'TimeUp' || userResponse === currentQuestion.correctAnswer) {
       setScore((prevScore) => prevScore + 1);
     }else{
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       await axios.post('http://localhost:3000/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className})
     }
 
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
 
   useEffect(() => {

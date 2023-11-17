@@ -6,7 +6,7 @@ const db = getFirestore();
 const wrongAnswer = async (req, res) => {
     try {
         const { question, uid, classId } = req.body;
-        const studentRef = db.collection('students').doc(uid);
+        const studentRef = db.collection('users').doc(uid);
         const classRef = db.collection('classes').doc(classId);
         const studentDoc = await studentRef.get();
         const classDoc = await classRef.get();
