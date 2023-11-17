@@ -5,10 +5,12 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import { useStateContext } from '../../context/StateContext';
+import html2canvas from 'html2canvas';
+import emailjs from '@emailjs/browser';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 let gradeArray = [0, 0, 0, 0, 0];
-
+emailjs.init('63EkXHr_zHJVHSj20')
 
 
 function ProgressChart() {
@@ -25,7 +27,6 @@ useEffect(() => {
 
   students.forEach((student) => {
     const test1Points = student.points[id.id];
-    stud = student;
 
     // Implement your grading logic here
     let grade;
@@ -56,6 +57,9 @@ useEffect(() => {
   // Log the grade distribution
   console.log("Grade distribution:", gradeArray);
 }, [students]);
+
+
+
     console.log("gradearray",gradeArray)
     // console.log("students",students)
     useEffect(() => {
@@ -108,11 +112,43 @@ useEffect(() => {
       ],
     };
 
+    let globalScreenshotUrl; // Define a global variable
+
+    const takeScreenshot = () => {
+      const chartElement = document.getElementById('pie-chart');
+      if (chartElement) {
+        html2canvas(chartElement).then((canvas) => {
+          globalScreenshotUrl = canvas.toDataURL('image/png');
+          // console.log('Screenshot URL:', globalScreenshotUrl);
+          // You can choose to do something else with the URL, e.g., save it in state
+        });
+      }
+    };
+
+    const sendResources =async()=>{
+      let inemail = "i.dheerajdileep@gmail.com"
+      takeScreenshot()
+      // console.log("scscscs",globalScreenshotUrl)
+      await emailjs.send("service_j73s3ya","template_ilvk4ct",{
+        content: globalScreenshotUrl,
+        toEmail: inemail,
+        },"63EkXHr_zHJVHSj20")
+        .then((result) => {
+          console.log(result);
+        }, (error) => {
+          console.log(error);
+        });
+
+
+    }
+
     // console.log("first",id)
   return (
     <div className='p-10 flex justify-center items-center flex-col'>
      <h1 className='text-3xl font-bold pb-10'> Test: {MyId}</h1>
-      <Pie data={data} className=''/>
+      <div id='pie-chart'>
+        <Pie data={data} className='' />
+      </div>
       <div className='pt-8 text-semibold text-xl border-2 bg-gray-100 p-5 mt-7 rounded-xl'>
         <div>
             <h1 className='font-bold py-3'> Weakest area of students</h1>
@@ -123,7 +159,7 @@ useEffect(() => {
         <button onClick={handleWeakest} className='bg-teal-500 rounded-lg text-white p-3 w-full '>
             <h1 className='font-bold py-3 '>View weak topic of the class</h1>
         </button>
-        <button className='bg-teal-500 rounded-lg text-white p-3 w-full'>
+        <button className='bg-teal-500 rounded-lg text-white p-3 w-full' onClick={sendResources}>
             <h1 className='font-bold py-3'>Send resources </h1>
         </button>
       </div>
