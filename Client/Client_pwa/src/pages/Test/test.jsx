@@ -32,6 +32,7 @@ export default function Test() {
         const response = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/pdf', {url: result.dto.Files[0].Url, testName, testDesc, className, questionType})
         if(response){
             console.log(response)
+            window.location.replace('/home')
         }
       } catch (error) {
         console.error('Error converting file:', error);
