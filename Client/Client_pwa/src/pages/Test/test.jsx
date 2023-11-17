@@ -29,7 +29,7 @@ export default function Test() {
 
         const result = await convertApi.convert('pdf', 'txt', params);
         console.log(result.dto.Files[0].Url)
-        const response = await axios.post('http://localhost:3000/api/pdf', {url: result.dto.Files[0].Url, testName, testDesc, className, questionType})
+        const response = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/pdf', {url: result.dto.Files[0].Url, testName, testDesc, className, questionType})
         if(response){
             console.log(response)
         }
