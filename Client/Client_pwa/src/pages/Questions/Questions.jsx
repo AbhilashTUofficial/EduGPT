@@ -167,27 +167,27 @@ function Questions() {
   };
 
   const onSubmit = async() => {
-    await axios.post('http://localhost:3000/api/submit', {uid: localStorage.getItem('uid'), testId: id , points: score})
-    return
+    await axios.post('http://localhost:3000/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score})
+    return 
   }
 
 
-  if(questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length){
+  if(questions &&  !userDetails.points?.id && currentQuestionIndex == questions.length-1){
     onSubmit();
-    return;
+    return (
+      <div className='w-screen h-screen justify-center items-center flex'>
+          <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
+              <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
+          </div>
+      </div>
+    )
   }
 
   return (
     <div>
       {questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length ? (
         renderQuestion(questions)
-      ) : (
-        <div className='w-screen h-screen justify-center items-center flex'>
-            <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
-                <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
-            </div>
-        </div>
-      )}
+      ) : ""}
     </div>
   );
 }
