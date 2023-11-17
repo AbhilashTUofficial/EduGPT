@@ -17,7 +17,7 @@ const AuthScreen = () => {
     }, [])
 
     return (
-        <CustomWebView webviewUrl={"https://6556e5206f52f149be2a9d96--stalwart-naiad-fbb5b1.netlify.app/login"}/>
+        <CustomWebView webviewUrl={"https://6556ef2d22ce8c4ed306cb51--stalwart-naiad-fbb5b1.netlify.app/login"}/>
     )
 }
 

@@ -7,6 +7,7 @@ export const NotificationListener = () => {
     // (optional) Called when Token is generated (iOS and Android)
     onRegister: async function (res) {
     //   dispatch(setFCMToken(res.token));
+    console.log(res.token)
     },
 
     // (required) Called when a remote is received or opened, or local notification is opened
@@ -14,9 +15,9 @@ export const NotificationListener = () => {
       console.log('NOTIFICATION: ', notification);
       NotificationManager(
         {
-          title: notification.data.TITLE,
-          message: notification.data.MESSAGE,
-          id: notification.data.MESSAGEID,
+          title: "notification.data.TITLE",
+          message: "notification.data.MESSAGE",
+          id: "notification.data.MESSAGEID",
         }
       );
 
