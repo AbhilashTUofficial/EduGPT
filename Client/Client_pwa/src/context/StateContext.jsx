@@ -22,6 +22,7 @@ export const StateContextProvider = ({ children }) => {
         try{
             const response = await axios.get('http://localhost:3000/api/student')
             setStudents(response.data.students)
+            console.log(response.data.students)
         }catch(error){
             console.log(error)
         }
@@ -41,6 +42,7 @@ export const StateContextProvider = ({ children }) => {
       try {
         const response = await axios.get('http://localhost:3000/api/test')
         setTests(response.data.tests)
+        console.log(response.data.tests)
       } catch (error) {
         console.log(error)
       }
