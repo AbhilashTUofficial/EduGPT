@@ -38,7 +38,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
       }).catch((error) => {
         console.log(error)
         // setLoading(false)
-        setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
+        // setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
         console.log('No access token')
       })
     }).catch((error) => {
