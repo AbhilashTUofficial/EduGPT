@@ -127,10 +127,14 @@ function Questions() {
   }, [currentQuestionIndex, score, questions.length]);
   useEffect(() => {
     const fetchQuestion = async () => {
-      const response = await axios.get(`http://localhost:3000/api/question/${id}`);
-      console.log(response.data)
-      setQuestions(response.data.questions)
-      setClassName(response.data.className)
+      try {
+        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+        console.log(response.data)
+        setQuestions(response.data.questions)
+        setClassName(response.data.className)
+      } catch (error) {
+        console.log(error)
+      }
     }
     fetchQuestion()
   }, [])
@@ -155,13 +159,13 @@ function Questions() {
 
   const onSubmit = async() => {
     await axios.post('http://localhost:3000/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score})
-    return
+    // return
   }
 
 
   if(questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length){
     onSubmit();
-    return;
+    // return;
   }
 
   return (
