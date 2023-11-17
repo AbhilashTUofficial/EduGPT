@@ -168,7 +168,7 @@ function Questions() {
     return (
       <div className='w-screen h-screen justify-center items-center flex'>
           <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
-              <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
+              <p>All questions answered! Final Score: {score || '0'}</p>
           </div>
       </div>
     )
@@ -176,7 +176,7 @@ function Questions() {
 
   return (
     <div>
-      {questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length ? (
+      {questions && !userDetails.points && currentQuestionIndex < questions.length ? (
         renderQuestion(questions)
       ) : ""}
     </div>

@@ -20,7 +20,8 @@
     "firebase": "^10.6.0",
     "firebase-admin": "^11.11.0",
     "firebase-config": "^1.0.0",
-    "openai": "^3.2.1"
+    "openai": "^3.2.1",
+    "youtube-search-api": "^1.2.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
