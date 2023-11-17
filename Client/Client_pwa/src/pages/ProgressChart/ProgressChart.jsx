@@ -75,6 +75,7 @@ useEffect(() => {
         if(res){
           console.log("response weak",res)
           setWeakestTopic(res.data.weakestTopic)
+          // const res2 = await axios.post('http://localhost:3000/api/trigger', {url: res.data.url, weakestTopic: res.data.weakestTopic})
         }
       } catch (error) {
         console.log(error)

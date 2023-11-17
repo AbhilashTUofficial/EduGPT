@@ -54,7 +54,7 @@ function Login() {
       setIsloggedin(!isloggedin);
       // ...
     }).catch((error) => {
-      setIsloggedin(!isloggedin);
+      // setIsloggedin(!isloggedin);
       // Error; SMS not sent
       console.log("first error",error)
       // ...

@@ -36,13 +36,13 @@ function Otp({ handleLoginchange,PhoneNumber }) {
           window.location.replace('/setdata')
         }
       }).catch(async(error) => {
-        localStorage.setItem('uid', 'f1NCt75UbqUdNurmw1fcc40RJTR2')
-        const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
-        if(result.data.exists){
-          window.location.replace('/home')
-        }else{
-          window.location.replace('/setdata')
-        }
+        // localStorage.setItem('uid', 'f1NCt75UbqUdNurmw1fcc40RJTR2')
+        // const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
+        // if(result.data.exists){
+        //   window.location.replace('/home')
+        // }else{
+        //   window.location.replace('/setdata')
+        // }
         console.log(error)
         // setLoading(false)
         // setError({ message: 'Sorry, the OTP you entered is incorrect. Please double-check the code and try again.', active: true })
