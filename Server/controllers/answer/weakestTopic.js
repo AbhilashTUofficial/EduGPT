@@ -1,4 +1,10 @@
 import {getWeakestTopic} from '../../services/openaiServices.js'
+import admin from '../../config/firebase-config.js'
+import {getFirestore} from 'firebase-admin/firestore'
+
+const db = getFirestore();
+
+
 
 const weakestTopic = async(req, res) => {
     try {

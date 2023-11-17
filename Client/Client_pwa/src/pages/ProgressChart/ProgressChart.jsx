@@ -1,5 +1,5 @@
 // Progress.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useParams } from 'react-router-dom';
@@ -15,8 +15,8 @@ function ProgressChart() {
 
     let id = useParams()
     let MyId = id.id.toUpperCase()
-    const [weakestTopic, setWeakestTopic] = React.useState('')
-    const [className, setClassname] = React.useState('')
+    const [weakestTopic, setWeakestTopic] = useState('')
+    const [classname, setClassname] = useState('')
     const {students} = useStateContext() // Initializing counts for grades A, B, C, D, E
 
 useEffect(() => {
@@ -58,23 +58,29 @@ useEffect(() => {
 }, [students]);
     console.log("gradearray",gradeArray)
     // console.log("students",students)
-    React.useEffect(() => {
+    useEffect(() => {
       const fetchClassName = async () => {
-        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+        console.log("idddddd",id.id)
+        const response = await axios.get(`http://localhost:3000/api/question/${id.id}`);
+        console.log("responseeeeeee",response)
         setClassname(response.data.className)
+        console.log("firstclasnameeeeee",classname)
       }
       fetchClassName()
-    }, [])
+    }, [classname])
     const handleWeakest = async() => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${className}/${id}`)
+        console.log("clasnameeeeee",classname)
+        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${classname}/${id.id}`)
         if(res){
+          console.log("response weak",res)
           setWeakestTopic(res.data.weakestTopic)
         }
       } catch (error) {
         console.log(error)
       }
     }
+    console.log("weaktopiccc",weakestTopic)
     const data = {
       labels: ['10-9', '9-8', '8-7', '6-5','Fail'],
       datasets: [
@@ -115,7 +121,7 @@ useEffect(() => {
       </div>
       <div className='flex flex-col justify-center items-center mt-6 gap-5 w-full'>    
         <button onClick={handleWeakest} className='bg-teal-500 rounded-lg text-white p-3 w-full '>
-            <h1 className='font-bold py-3 '>View all Students data</h1>
+            <h1 className='font-bold py-3 '>View weak topic of the class</h1>
         </button>
         <button className='bg-teal-500 rounded-lg text-white p-3 w-full'>
             <h1 className='font-bold py-3'>Send resources </h1>
