@@ -60,14 +60,14 @@ useEffect(() => {
     // console.log("students",students)
     React.useEffect(() => {
       const fetchClassName = async () => {
-        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+        const response = await axios.get(`http://localhost:3000/api/question/${id.id}`);
         setClassname(response.data.className)
       }
       fetchClassName()
     }, [])
     const handleWeakest = async() => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${className}/${id}`)
+        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${className}/${id.id}`)
         if(res){
           setWeakestTopic(res.data.weakestTopic)
         }

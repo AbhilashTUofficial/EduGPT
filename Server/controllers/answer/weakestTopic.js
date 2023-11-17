@@ -1,4 +1,9 @@
 import {getWeakestTopic} from '../../services/openaiServices.js'
+import fetchURL from '../notification/fetchURL.js';
+import admin from '../../config/firebase-config.js'
+import {getFirestore} from 'firebase-admin/firestore'
+
+const db = getFirestore();
 
 const weakestTopic = async(req, res) => {
     try {
@@ -9,6 +14,7 @@ const weakestTopic = async(req, res) => {
         const classData = classGet.data();
         const wrongquestions = classData.wrongquestions;
         const weakestTopic = await getWeakestTopic(wrongquestions);
+        const url = await fetchURL(weakestTopic);
         res.send({weakestTopic})
     }catch(error){
         console.log(error)
