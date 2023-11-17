@@ -2,10 +2,10 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import CustomWebView from '../../Components/WebView/CustomWebView'
 
-const StatsScreen = () => {
+const ProfileScreen = () => {
   return (
-    <CustomWebView webviewUrl={"https://www.npmjs.com/package/react-native-rename"}/>
+    <CustomWebView webviewUrl={"https://reactnavigation.org/docs/headers/"}/>
   )
 }
 
-export default StatsScreen
+export default ProfileScreen

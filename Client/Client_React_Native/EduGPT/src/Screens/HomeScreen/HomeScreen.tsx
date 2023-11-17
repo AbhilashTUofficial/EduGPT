@@ -1,11 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import CustomWebView from '../../Components/WebView/CustomWebView'
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <CustomWebView webviewUrl={"https://testfcm.com/"}/>
   )
 }
 
