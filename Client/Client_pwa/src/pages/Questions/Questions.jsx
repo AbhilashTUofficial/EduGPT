@@ -125,14 +125,13 @@ function Questions() {
 
   const handleAnswer = async(userResponse) => {
     const currentQuestion = questions[currentQuestionIndex];
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
 
     if (userResponse === 'TimeUp' || userResponse === currentQuestion.correctAnswer) {
       setScore((prevScore) => prevScore + 1);
     }else{
       await axios.post('http://localhost:3000/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className})
     }
-
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
 
   useEffect(() => {
@@ -166,6 +165,17 @@ function Questions() {
 
     return null;
   };
+
+  const onSubmit = async() => {
+    await axios.post('http://localhost:3000/api/submit', {uid: localStorage.getItem('uid'), testId: id , points: score})
+    return
+  }
+
+
+  if(questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length){
+    onSubmit();
+    return;
+  }
 
   return (
     <div>
