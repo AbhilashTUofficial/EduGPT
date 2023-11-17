@@ -106,22 +106,6 @@ function Questions() {
   const [score, setScore] = useState(0);
   const {userDetails} = useStateContext()
   const { id } = useParams();
-  // const data = [
-  //   { type: 'YesNo', question: 'Is the sky blue?', answer: 'Yes' },
-  //   {
-  //     type: 'MultipleChoice',
-  //     question: 'What is the capital of France?',
-  //     options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
-  //     answer: 'Paris',
-  //   },
-  //   { type: 'YesNo', question: 'Are elephants reptiles?', answer: 'No' },
-  //   {
-  //     type: 'MultipleChoice',
-  //     question: 'Which programming language is React built with?',
-  //     options: ['JavaScript', 'Java', 'C++', 'Python'],
-  //     answer: 'JavaScript',
-  //   },
-  // ];
 
   const handleAnswer = async(userResponse) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -144,6 +128,7 @@ function Questions() {
   useEffect(() => {
     const fetchQuestion = async () => {
       const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+      console.log(response.data)
       setQuestions(response.data.questions)
       setClassName(response.data.className)
     }
@@ -169,7 +154,7 @@ function Questions() {
   };
 
   const onSubmit = async() => {
-    await axios.post('http://localhost:3000/api/submit', {uid: localStorage.getItem('uid'), testId: id , points: score})
+    await axios.post('http://localhost:3000/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score})
     return
   }
 

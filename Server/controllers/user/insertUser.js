@@ -6,7 +6,6 @@ const db = getFirestore();
 const insertUser = async(req, res) => {
     try {
         const phone = req.body.phone
-        console.log(req.body.uid, phone)
         const userRef = db.collection('users').doc(req.body.uid);
         const userGet = await userRef.get();
         if(userGet.data()){

@@ -24,8 +24,8 @@ const wrongAnswer = async (req, res) => {
         }else{
             wrongquestions = [question];
         }
-        await classRef.set({wrongquestions})
-        await studentRef.set({wrongquestions})
+        await classRef.set({...classData, wrongquestions})
+        await studentRef.set({...student, wrongquestions})
     } catch (error) {
         console.log(error)
     }

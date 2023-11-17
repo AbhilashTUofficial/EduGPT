@@ -5,7 +5,7 @@ const db = getFirestore();
 
 const fetchStudents = async (req, res) => {
     try {
-        const studentRef = db.collection('students');
+        const studentRef = db.collection('users');
         const studentGet = await studentRef.get();
         const students = [];
         studentGet.forEach(doc => {
