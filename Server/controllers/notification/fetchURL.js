@@ -2,11 +2,13 @@ import youtubesearchapi from 'youtube-search-api'
 
 const fetchURL = async(weakestTopic) => {
     try {
-        youtubesearchapi.GetListByKeyword("Superman",false,1)
-            .then(result => console.log(result))
+        let url
+        youtubesearchapi.GetListByKeyword(weakestTopic,false,1)
+            .then(result => {
+                url = result
+            })
             .catch(error => console.log(error))
-        return result
-
+            return `https://youtube.com/watch?v=${url.id}`
     } catch (error) {
         console.log(error)
     }
