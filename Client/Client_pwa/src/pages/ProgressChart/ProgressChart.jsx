@@ -3,6 +3,7 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useParams } from 'react-router-dom';
+import axios from 'axios'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -37,20 +38,39 @@ function ProgressChart() {
 
     let id = useParams()
     let MyId = id.id.toUpperCase()
+    const [weakestTopic, setWeakestTopic] = React.useState('')
+    const [className, setClassname] = React.useState('')
+    React.useEffect(() => {
+      const fetchClassName = async () => {
+        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+        setClassname(response.data.className)
+      }
+      fetchClassName()
+    }, [])
+    const handleWeakest = async() => {
+      try {
+        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${className}/${id}`)
+        if(res){
+          setWeakestTopic(res.data.weakestTopic)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     // console.log("first",id)
   return (
     <div className='p-10 flex justify-center items-center flex-col'>
-     <h1 className='text-3xl font-bold pb-10'> Section {MyId}</h1>
+     <h1 className='text-3xl font-bold pb-10'> Test: {MyId}</h1>
       <Pie data={data} className=''/>
       <div className='pt-8 text-semibold text-xl border-2 bg-gray-100 p-5 mt-7 rounded-xl'>
         <div>
             <h1 className='font-bold py-3'> Weakest area of students</h1>
-            <h2 className='text-teal-500 font-semibold'> sdkvj</h2>
+            <h2 className='text-teal-500 font-semibold'> {weakestTopic}</h2>
         </div>
       </div>
       <div className='flex flex-col justify-center items-center mt-6 gap-5 w-full'>    
-        <button className='bg-teal-500 rounded-lg text-white p-3 w-full '>
+        <button onClick={handleWeakest} className='bg-teal-500 rounded-lg text-white p-3 w-full '>
             <h1 className='font-bold py-3 '>View all Students data</h1>
         </button>
         <button className='bg-teal-500 rounded-lg text-white p-3 w-full'>

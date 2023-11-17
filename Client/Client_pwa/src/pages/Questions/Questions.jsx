@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
+import {useStateContext} from '../../context/StateContext';
 
 const YesOrNo = ({ question, onAnswer }) => {
   const [timer, setTimer] = useState(30);
@@ -31,8 +32,8 @@ const YesOrNo = ({ question, onAnswer }) => {
           <button
             className="bg-green-500 w-full text-white px-4 py-2 rounded-md mr-4 hover:bg-green-600"
             onClick={() => {
-              handleUserAnswer('Yes');
-              onAnswer('Yes');
+              handleUserAnswer('True');
+              onAnswer('True');
             }}
           >
             Yes
@@ -40,8 +41,8 @@ const YesOrNo = ({ question, onAnswer }) => {
           <button
             className="bg-red-500 w-full text-white px-4 py-2 rounded-md hover:bg-red-600"
             onClick={() => {
-              handleUserAnswer('No');
-              onAnswer('No');
+              handleUserAnswer('False');
+              onAnswer('False');
             }}
           >
             No
@@ -102,6 +103,7 @@ function Questions() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([])
   const [score, setScore] = useState(0);
+  const {userDetails} = useStateContext()
   const { id } = useParams();
   // const data = [
   //   { type: 'YesNo', question: 'Is the sky blue?', answer: 'Yes' },
@@ -123,7 +125,7 @@ function Questions() {
   const handleAnswer = (userResponse) => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    if (userResponse === 'TimeUp' || userResponse === currentQuestion.answer) {
+    if (userResponse === 'TimeUp' || userResponse === currentQuestion.correctAnswer) {
       setScore((prevScore) => prevScore + 1);
     }
 
@@ -163,12 +165,12 @@ function Questions() {
 
   return (
     <div>
-      {questions && currentQuestionIndex < questions.length ? (
+      {questions && !userDetails.points?.id && currentQuestionIndex < questions.length ? (
         renderQuestion(questions)
       ) : (
         <div className='w-screen h-screen justify-center items-center flex'>
             <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
-                <p>All questions answered! Final Score: {score}</p>
+                <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
             </div>
         </div>
       )}

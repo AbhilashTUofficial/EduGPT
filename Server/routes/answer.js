@@ -10,6 +10,6 @@ const router = express.Router()
 
 router.post('/wronganswer', wrongAnswer)
 router.post('/submitanswer', submitAnswer)
-router.get('/weakesttopic', weakestTopic)
+router.get('/weakesttopic/:classid/:testid', weakestTopic)
 
 export default router

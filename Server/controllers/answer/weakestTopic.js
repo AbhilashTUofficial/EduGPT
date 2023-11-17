@@ -2,7 +2,9 @@ import {getWeakestTopic} from '../../services/openaiServices.js'
 
 const weakestTopic = async(req, res) => {
     try {
-        const classRef = db.collection('classes').doc(req.body.class);
+        const className  = req.params.classid;
+        const testName = req.params.testid
+        const classRef = db.collection('classes').doc(className);
         const classGet = await classRef.get();
         const classData = classGet.data();
         const wrongquestions = classData.wrongquestions;

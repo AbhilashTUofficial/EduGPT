@@ -9,7 +9,6 @@ const openai = new OpenAIApi(configuration);
 
 export async function callOpenAI(pdfData,type) {
   try {
-    console.log(pdfData,type)
     const pdfDataWithCommas = pdfData.replace(/ {2}/g, ',')
     let prompt;
 
