@@ -68,24 +68,31 @@ const CustomWebView = ({ webviewUrl }) => {
             console.log('Post Message: ', postMessage);
         } catch { }
     };
-    return(
+    return (
         <WebView
-        ref={ref => (webviewRef = ref)}
-  
-        startInLoadingState={true}
-        onMessage={e => onMessage(e.nativeEvent)}
-        allowsProtectedMedia
-        originWhitelist={['http://*', 'https://*']}
-        allowUniversalAccessFromFileURLs={true}
-        allowFileAccess={true}
-        onLoad={handleWebViewLoad}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        onNavigationStateChange={e => handleNavigationStateChange(e)}
+            ref={ref => (webviewRef = ref)}
 
-        mixedContentMode={'always'}
-        source={{uri: webviewUrl}}
-        injectedJavaScript={`
+            startInLoadingState={true}
+            onMessage={e => onMessage(e.nativeEvent)}
+            allowsProtectedMedia
+            originWhitelist={['http://*', 'https://*']}
+            allowUniversalAccessFromFileURLs={true}
+            allowFileAccess={true}
+            onLoad={handleWebViewLoad}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            onNavigationStateChange={e => handleNavigationStateChange(e)}
+
+            mixedContentMode={'always'}
+            source={{ uri: webviewUrl }}
+            injectedJavaScript={`
+        window.getSelection().removeAllRanges();
+        document.body.style.userSelect = 'none';
+        const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+    document.getElementsByTagName('head')[0].appendChild(meta);
+
       window.addEventListener(
         "message",
         (event) => {
@@ -94,7 +101,7 @@ const CustomWebView = ({ webviewUrl }) => {
         false
       );
       `}
-      />
+        />
     )
 
 };

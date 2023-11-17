@@ -9,6 +9,7 @@ import HeaderNavTile from '../Components/Navigation/HeaderNavTile';
 import { darkGrey } from '../Constants/constants';
 import ProfileScreen from '../Screens/ProfileScreen/ProfileScreen';
 import { NotificationListener } from '../Notification/NotificationListener';
+import { ReginsterNotification } from '../Notification/NotificationHelper';
 
 const StackController = () => {
   const Stack = createNativeStackNavigator();
@@ -17,7 +18,9 @@ const StackController = () => {
 
 
   useEffect(() => {
+    ReginsterNotification();
     NotificationListener();
+    
   }, []);
 
 
