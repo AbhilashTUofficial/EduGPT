@@ -106,22 +106,6 @@ function Questions() {
   const [score, setScore] = useState(0);
   const {userDetails} = useStateContext()
   const { id } = useParams();
-  // const data = [
-  //   { type: 'YesNo', question: 'Is the sky blue?', answer: 'Yes' },
-  //   {
-  //     type: 'MultipleChoice',
-  //     question: 'What is the capital of France?',
-  //     options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
-  //     answer: 'Paris',
-  //   },
-  //   { type: 'YesNo', question: 'Are elephants reptiles?', answer: 'No' },
-  //   {
-  //     type: 'MultipleChoice',
-  //     question: 'Which programming language is React built with?',
-  //     options: ['JavaScript', 'Java', 'C++', 'Python'],
-  //     answer: 'JavaScript',
-  //   },
-  // ];
 
   const handleAnswer = async(userResponse) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -130,8 +114,10 @@ function Questions() {
     if (userResponse === 'TimeUp' || userResponse === currentQuestion.correctAnswer) {
       setScore((prevScore) => prevScore + 1);
     }else{
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       await axios.post('http://localhost:3000/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className})
     }
+
   };
 
   useEffect(() => {
@@ -141,9 +127,14 @@ function Questions() {
   }, [currentQuestionIndex, score, questions.length]);
   useEffect(() => {
     const fetchQuestion = async () => {
-      const response = await axios.get(`http://localhost:3000/api/question/${id}`);
-      setQuestions(response.data.questions)
-      setClassName(response.data.className)
+      try {
+        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
+        console.log(response.data)
+        setQuestions(response.data.questions)
+        setClassName(response.data.className)
+      } catch (error) {
+        console.log(error)
+      }
     }
     fetchQuestion()
   }, [])
@@ -167,27 +158,27 @@ function Questions() {
   };
 
   const onSubmit = async() => {
-    await axios.post('http://localhost:3000/api/submit', {uid: localStorage.getItem('uid'), testId: id , points: score})
-    return
+    await axios.post('http://localhost:3000/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score})
+    // return
   }
 
 
-  if(questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length){
+  if(questions &&  !userDetails.points?.id && currentQuestionIndex == questions.length-1){
     onSubmit();
-    return;
+    return (
+      <div className='w-screen h-screen justify-center items-center flex'>
+          <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
+              <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
+          </div>
+      </div>
+    )
   }
 
   return (
     <div>
       {questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length ? (
         renderQuestion(questions)
-      ) : (
-        <div className='w-screen h-screen justify-center items-center flex'>
-            <div className='font-bold text-3xl w-[20rem] h-[20rem] text-center p-8 flex justify-center items-center rounded-full bg-teal-500 text-white'>
-                <p>All questions answered! Final Score: {score || userDetails.points?.id}</p>
-            </div>
-        </div>
-      )}
+      ) : ""}
     </div>
   );
 }

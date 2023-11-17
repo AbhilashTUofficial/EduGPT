@@ -10,7 +10,6 @@ const fetchQuestion = async(req, res) => {
         if (!doc.exists) {
             console.log('No such document!');
         } else {
-            console.log(doc.data().questions)
             res.status(200).json({questions: doc.data().questions, className: doc.data().className})
         }
     } catch (error) {

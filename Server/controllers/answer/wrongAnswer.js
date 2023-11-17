@@ -6,7 +6,7 @@ const db = getFirestore();
 const wrongAnswer = async (req, res) => {
     try {
         const { question, uid, classId } = req.body;
-        const studentRef = db.collection('students').doc(uid);
+        const studentRef = db.collection('users').doc(uid);
         const classRef = db.collection('classes').doc(classId);
         const studentDoc = await studentRef.get();
         const classDoc = await classRef.get();
@@ -24,8 +24,8 @@ const wrongAnswer = async (req, res) => {
         }else{
             wrongquestions = [question];
         }
-        await classRef.set({wrongquestions})
-        await studentRef.set({wrongquestions})
+        await classRef.set({...classData, wrongquestions})
+        await studentRef.set({...student, wrongquestions})
     } catch (error) {
         console.log(error)
     }
