@@ -5,10 +5,12 @@ import Otpbox from '../../components/Otp/Otpbox'
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import {useStateContext} from '../../context/StateContext'
 // import { PhoneNumber } from 'react-phone-number-input';
 
 function Otp({ handleLoginchange,PhoneNumber }) {
   const [otp, setOtp] = useState(0);
+  const {userDetails, fetchUserDetails} = useStateContext()
   const navigate = useNavigate()
 
   const handleOtpChange = (value) => {
@@ -31,7 +33,17 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         localStorage.setItem('uid', user.uid)
         const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/login', {uid: user.uid, phone: PhoneNumber})
         if(result.data.exists){
-          window.location.replace('/home')
+          fetchUserDetails()
+          if(userDetails){
+            const messageData = { 
+              type: 'auth',
+              loggedIn: 'true',
+              userType: userDetails.type == 0 ? 'university' : userDetails.type == 1 ? 'teacher' : 'student'
+            };
+            window.postMessage(JSON.stringify(messageData), '*');
+            window.location.replace('/home')
+          }
+
         }else{
           window.location.replace('/setdata')
         }
