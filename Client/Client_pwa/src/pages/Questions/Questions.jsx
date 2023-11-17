@@ -102,6 +102,7 @@ const MultipleChoice = ({ question, options, onAnswer }) => {
 function Questions() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([])
+  const [className, setClassName] = useState()
   const [score, setScore] = useState(0);
   const {userDetails} = useStateContext()
   const { id } = useParams();
@@ -122,11 +123,13 @@ function Questions() {
   //   },
   // ];
 
-  const handleAnswer = (userResponse) => {
+  const handleAnswer = async(userResponse) => {
     const currentQuestion = questions[currentQuestionIndex];
 
     if (userResponse === 'TimeUp' || userResponse === currentQuestion.correctAnswer) {
       setScore((prevScore) => prevScore + 1);
+    }else{
+      await axios.post('http://localhost:3000/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className})
     }
 
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -141,6 +144,7 @@ function Questions() {
     const fetchQuestion = async () => {
       const response = await axios.get(`http://localhost:3000/api/question/${id}`);
       setQuestions(response.data.questions)
+      setClassName(response.data.className)
     }
     fetchQuestion()
   }, [])
@@ -165,7 +169,7 @@ function Questions() {
 
   return (
     <div>
-      {questions && !userDetails.points?.id && currentQuestionIndex < questions.length ? (
+      {questions &&  !userDetails.points?.id && currentQuestionIndex < questions.length ? (
         renderQuestion(questions)
       ) : (
         <div className='w-screen h-screen justify-center items-center flex'>

@@ -13,19 +13,19 @@ const wrongAnswer = async (req, res) => {
         const student = studentDoc.data();
         const classData = classDoc.data();
         let wrongquestions = []
-        if (student.questions) {
+        if (student && student.wrongquestions) {
             wrongquestions = [...student.wrongquestions, question];
         }else{
             wrongquestions = [question];
         }
         
-        if (classData.questions) {
-            wrongquestions = [...classData.questions, question];
+        if (classData && classData.wrongquestions) {
+            wrongquestions = [...classData.wrongquestions, question];
         }else{
             wrongquestions = [question];
         }
-        await classRef.update({wrongquestions})
-        await studentRef.update({wrongquestions})
+        await classRef.set({wrongquestions})
+        await studentRef.set({wrongquestions})
     } catch (error) {
         console.log(error)
     }
