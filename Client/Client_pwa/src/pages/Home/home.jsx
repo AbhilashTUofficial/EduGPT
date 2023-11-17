@@ -6,7 +6,7 @@ import { useStateContext }from "../../context/StateContext";
 
 export default function Home() {
   React.useEffect(() => {
-    if(localStorage.getItem('uid') == ''){
+    if(!localStorage.getItem('uid') || localStorage.getItem('uid') == ''){
       window.location.replace('/login')
     }
   }, [])
