@@ -22,7 +22,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/setdata" element={<SetData />} />
-        <Route path="/questions" element={<Questions />} />
+        <Route path="/questions/:id" element={<Questions />} />
         {/* <Route path="/Test" element={<Test />} /> */}
         <Route path="/Test" element={<Test />} />
         <Route path="/progress" element={<Progress/>} />
