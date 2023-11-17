@@ -19,7 +19,7 @@ const DataBox = () => {
   };
 
   const handleSubmit = async() => {
-    const result = await axios.post('http://localhost:3000/api/setdata', {name, type: userType, class: className, uid: localStorage.getItem('uid')})
+    const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/setdata', {name, type: userType, class: className, uid: localStorage.getItem('uid')})
     if(result){
         window.location.replace('/home')
     }

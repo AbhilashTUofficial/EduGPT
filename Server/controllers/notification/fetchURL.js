@@ -11,7 +11,7 @@ const fetchURL = async(weakestTopic) => {
                 return url
             })
             .then(async() =>{
-                await axios.post('http://localhost:3000/api/trigger', {url, weakestTopic})
+                await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/trigger', {url, weakestTopic})
             })
             .catch(error => console.log(error))
     } catch (error) {

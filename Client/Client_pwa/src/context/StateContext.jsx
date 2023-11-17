@@ -11,7 +11,7 @@ export const StateContextProvider = ({ children }) => {
     
     const fetchClasses = async () => {
         try{
-            const response = await axios.get('http://localhost:3000/api/class')
+            const response = await axios.get('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/class')
             setClasses(response.data.classes)
             console.log(response.data.classes)
         }catch(error){
@@ -20,7 +20,7 @@ export const StateContextProvider = ({ children }) => {
     }
     const fetchStudents = async () => {
         try{
-            const response = await axios.get('http://localhost:3000/api/student')
+            const response = await axios.get('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/student')
             setStudents(response.data.students)
             console.log(response.data.students)
         }catch(error){
@@ -30,7 +30,7 @@ export const StateContextProvider = ({ children }) => {
     const fetchUserDetails = async() => {
       try {
         if(localStorage.getItem('uid') !== null || localStorage.getItem('uid') !== ''){
-          const response = await axios.get(`http://localhost:3000/api/user/${localStorage.getItem('uid')}`)
+          const response = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/user/${localStorage.getItem('uid')}`)
           setUserDetails(response.data.user)
           console.log(response.data.user)
         }
@@ -40,7 +40,7 @@ export const StateContextProvider = ({ children }) => {
     }
     const fetchTests = async() => {
       try {
-        const response = await axios.get('http://localhost:3000/api/test')
+        const response = await axios.get('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/test')
         setTests(response.data.tests)
         console.log(response.data.tests)
       } catch (error) {

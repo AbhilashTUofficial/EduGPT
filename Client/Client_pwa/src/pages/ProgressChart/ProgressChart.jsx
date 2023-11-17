@@ -65,7 +65,7 @@ useEffect(() => {
     useEffect(() => {
       const fetchClassName = async () => {
         console.log("idddddd",id.id)
-        const response = await axios.get(`http://localhost:3000/api/question/${id.id}`);
+        const response = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/question/${id.id}`);
         console.log("responseeeeeee",response)
         setClassname(response.data.className)
         console.log("firstclasnameeeeee",classname)
@@ -75,11 +75,11 @@ useEffect(() => {
     const handleWeakest = async() => {
       try {
         console.log("clasnameeeeee",classname)
-        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${classname}/${id.id}`)
+        const res = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/weakesttopic/${classname}/${id.id}`)
         if(res){
           console.log("response weak",res)
           setWeakestTopic(res.data.weakestTopic)
-          // const res2 = await axios.post('http://localhost:3000/api/trigger', {url: res.data.url, weakestTopic: res.data.weakestTopic})
+          // const res2 = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/trigger', {url: res.data.url, weakestTopic: res.data.weakestTopic})
         }
       } catch (error) {
         console.log(error)

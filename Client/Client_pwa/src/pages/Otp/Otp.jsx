@@ -29,7 +29,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         localStorage.setItem('refreshToken', refreshToken)
         localStorage.setItem('phone', `${PhoneNumber}`)
         localStorage.setItem('uid', user.uid)
-        const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
+        const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/login', {uid: user.uid, phone: PhoneNumber})
         if(result.data.exists){
           window.location.replace('/home')
         }else{
@@ -37,7 +37,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         }
       }).catch(async(error) => {
         // localStorage.setItem('uid', 'f1NCt75UbqUdNurmw1fcc40RJTR2')
-        // const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
+        // const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/login', {uid: user.uid, phone: PhoneNumber})
         // if(result.data.exists){
         //   window.location.replace('/home')
         // }else{
