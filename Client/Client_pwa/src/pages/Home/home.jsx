@@ -3,6 +3,7 @@ import Testbox from "../../components/Testbox/Testbox";
 import Classbox from "../../components/classbox/classbox";
 import teach from "../../assets/teach.jpg";
 import { useStateContext }from "../../context/StateContext";
+import BotNav from "../../components/BotNav";
 
 export default function Home() {
   React.useEffect(() => {
@@ -31,6 +32,7 @@ export default function Home() {
         }
       </div>
       <img src={teach} alt="teach" className="w-full mt-[6rem]" />
+      {/* <BotNav /> */}
     </div>
   );
 }

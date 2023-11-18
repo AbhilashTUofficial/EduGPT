@@ -9,13 +9,17 @@ import Progress from "./pages/Progress/Progress";
 import ProgressChart from "./pages/ProgressChart/ProgressChart";
 import Test from "./pages/Test/test"
 import SetData from "./pages/SetData/SetData";
+import BotNav from "./components/BotNav";
 import Questions from "./pages/Questions/Questions";
+import TopNav from "./components/TopNav";
+import { useStateContext } from "./context/StateContext";
 
 function App() {
   const [count, setCount] = useState(0);
-
+  const {userDetails} = useStateContext()
   return (
     <>
+      {userDetails && userDetails.length > 0 && <TopNav />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -28,6 +32,8 @@ function App() {
         <Route path="/progress" element={<Progress/>} />
         <Route path="/progress/:id" element={<ProgressChart/>} />
       </Routes>
+      {userDetails && userDetails.length > 0 && <BotNav />}
+
     </>
   );
 }
