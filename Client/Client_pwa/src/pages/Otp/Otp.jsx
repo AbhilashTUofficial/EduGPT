@@ -31,7 +31,7 @@ function Otp({ handleLoginchange,PhoneNumber }) {
         localStorage.setItem('refreshToken', refreshToken)
         localStorage.setItem('phone', `${PhoneNumber}`)
         localStorage.setItem('uid', user.uid)
-        const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/login', {uid: user.uid, phone: PhoneNumber}, {
+        const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber}, {
           headers: {
             Authorization: localStorage.getItem('accessToken')
           }
@@ -45,15 +45,14 @@ function Otp({ handleLoginchange,PhoneNumber }) {
               userType: userDetails.type == 0 ? 'university' : userDetails.type == 1 ? 'teacher' : 'student'
             };
             window.postMessage(JSON.stringify(messageData), '*');
-            window.location.replace('/home')
           }
-
+          window.location.replace('/home')
         }else{
           window.location.replace('/setdata')
         }
       }).catch(async(error) => {
         // localStorage.setItem('uid', 'f1NCt75UbqUdNurmw1fcc40RJTR2')
-        // const result = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/login', {uid: user.uid, phone: PhoneNumber})
+        // const result = await axios.post('http://localhost:3000/api/login', {uid: user.uid, phone: PhoneNumber})
         // if(result.data.exists){
         //   window.location.replace('/home')
         // }else{

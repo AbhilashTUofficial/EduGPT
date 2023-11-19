@@ -115,7 +115,7 @@ function Questions() {
       setScore((prevScore) => prevScore + 1);
     }else{
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className}, {
+      await axios.post('http://localhost:3000/api/wronganswer', {question: currentQuestion.question, uid: localStorage.getItem('uid'), classId: className}, {
         headers: {
           Authorization: localStorage.getItem('accessToken')
         }
@@ -132,7 +132,7 @@ function Questions() {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const response = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/question/${id}`);
+        const response = await axios.get(`http://localhost:3000/api/question/${id}`);
         console.log(response.data)
         setQuestions(response.data.questions)
         setClassName(response.data.className)
@@ -162,7 +162,7 @@ function Questions() {
   };
 
   const onSubmit = async() => {
-    await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score}, {
+    await axios.post('http://localhost:3000/api/submitanswer', {uid: localStorage.getItem('uid'), testId: id , points: score}, {
       headers: {
         Authorization: localStorage.getItem('accessToken')
       }
@@ -171,7 +171,7 @@ function Questions() {
   }
 
 
-  if(questions &&  !userDetails.points?.id && currentQuestionIndex == questions.length-1){
+  if(questions && currentQuestionIndex == questions.length-1){
     onSubmit();
     return (
       <div className='w-screen h-screen justify-center items-center flex'>
@@ -184,7 +184,7 @@ function Questions() {
 
   return (
     <div>
-      {questions && currentQuestionIndex < questions.length ? (
+      {questions && currentQuestionIndex < questions.length-1 ? (
         renderQuestion(questions)
       ) : ""}
     </div>

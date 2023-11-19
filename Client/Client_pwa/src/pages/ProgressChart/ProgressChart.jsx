@@ -19,6 +19,7 @@ function ProgressChart() {
     let MyId = id.id.toUpperCase()
     const [weakestTopic, setWeakestTopic] = useState('')
     const [classname, setClassname] = useState('')
+    const [url, setURL] = useState('')
     const {students} = useStateContext() // Initializing counts for grades A, B, C, D, E
 
 useEffect(() => {
@@ -64,22 +65,20 @@ useEffect(() => {
     // console.log("students",students)
     useEffect(() => {
       const fetchClassName = async () => {
-        console.log("idddddd",id.id)
-        const response = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/question/${id.id}`);
-        console.log("responseeeeeee",response)
+        const response = await axios.get(`http://localhost:3000/api/question/${id.id}`);
         setClassname(response.data.className)
-        console.log("firstclasnameeeeee",classname)
       }
       fetchClassName()
     }, [classname])
     const handleWeakest = async() => {
       try {
         console.log("clasnameeeeee",classname)
-        const res = await axios.get(`https://eduu-server-dfd0c081bcc6.herokuapp.com/api/weakesttopic/${classname}/${id.id}`)
+        const res = await axios.get(`http://localhost:3000/api/weakesttopic/${classname}/${id.id}`)
         if(res){
           console.log("response weak",res)
           setWeakestTopic(res.data.weakestTopic)
-          // const res2 = await axios.post('https://eduu-server-dfd0c081bcc6.herokuapp.com/api/trigger', {url: res.data.url, weakestTopic: res.data.weakestTopic})
+          setURL(res.data.url)
+          // const res2 = await axios.post('http://localhost:3000/api/trigger', {url: res.data.url, weakestTopic: res.data.weakestTopic})
         }
       } catch (error) {
         console.log(error)
@@ -154,6 +153,7 @@ useEffect(() => {
         <div>
             <h1 className='font-bold py-3'> Weakest area of students</h1>
             <h2 className='text-teal-500 font-semibold'> {weakestTopic}</h2>
+            <h2 className='text-teal-500 font-semibold'>{url && `Youtube Study Material: ${url}`}</h2>
         </div>
       </div>
       <div className='flex flex-col justify-center items-center mt-6 gap-5 w-full'>    

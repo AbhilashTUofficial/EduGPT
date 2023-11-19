@@ -19,7 +19,7 @@ function App() {
   const {userDetails} = useStateContext()
   return (
     <>
-      {userDetails && userDetails.length > 0 && <TopNav />}
+      {userDetails && <TopNav />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/progress" element={<Progress/>} />
         <Route path="/progress/:id" element={<ProgressChart/>} />
       </Routes>
-      {userDetails && userDetails.length > 0 && <BotNav />}
+      {userDetails && <BotNav />}
 
     </>
   );

@@ -1,5 +1,7 @@
 # Eduu - Revolutionizing Education Through Technology
 
+PWA Application - https://eduu.netlify.app/
+
 ## Overview
 
 Eduu is a sophisticated Software as a Service (SaaS) platform designed to transform the educational landscape by providing innovative tools for universities, teachers, and students. Our platform focuses on automated analysis of student and teacher capabilities to enhance the teaching and learning experience, seamless communication, and efficient content sharing.
@@ -90,9 +92,31 @@ Eduu is a sophisticated Software as a Service (SaaS) platform designed to transf
 
 - **Adherence to Regulations:** Strict compliance with relevant data protection laws and educational regulations.
 
-## Getting Started
+## Getting Started (run locally)
 
 1. **Clone the repository.**
 
    ```bash
-   git clone https://github.com/AbhilashTUofficial/EduGPT.git
+   git clone https://github.com/Top-100-Coders/eduu
+
+2. **Change directory.**
+
+   ```bash
+   cd Client/Client_pwa
+
+3. **Install all dependencies.**
+
+   ```bash
+   npm install
+
+4. **Run the client side.**
+
+   ```bash
+   npm run dev
+
+5. **Open a new terminal and change directory and run the following commands**
+
+   ```bash
+   cd Server
+   npm install
+   npm run start
